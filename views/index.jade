@@ -58,6 +58,6 @@ block content
                         input.form-control(ng-model="user.date" id="date")
 
                 div.form-group
-                    label(class="control-label col-sm-2") Фото
+                    label(class="control-label col-sm-2") 
                     div.col-sm-10
-                        input.form-control(ng-model="user.image" type="file")
+                        button(type="button" class="btn btn-success" ng-click="save()") Save
