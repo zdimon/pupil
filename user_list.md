@@ -2,7 +2,12 @@
 
 ##Install requirements.
     
-    npm install angular bootstrap bootstrap-datepicker --save
+    npm install angular bootstrap bootstrap-datepicker open --save
+    
+##Open browser    
+    
+    var open = require('open');
+    open('http://localhost:3000');   
 
 ##Add scripts
 
