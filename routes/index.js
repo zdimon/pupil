@@ -7,9 +7,7 @@
   router = express.Router();
 
   router.get('/', function(req, res, next) {
-    return res.render('index', {
-      title: 'Express'
-    });
+    return res.render('layout');
   });
 
   module.exports = router;

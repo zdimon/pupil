@@ -1,0 +1,17 @@
+h1 Страницы
+
+TABLE.table
+    thead
+        tr
+            th #
+            th Заголовок
+            th Действия
+    tbody
+        tr(ng-repeat="p in pages")
+            td
+                {{ p.id }}
+            td
+                {{ p.title }}
+            td
+                a(href="#" ng-click="edit(p.id)") Редактировать
+                a(href="#" ng-click="delete(p.id)") Удалить

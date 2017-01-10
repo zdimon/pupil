@@ -7,6 +7,7 @@ html
         script(src="node_modules/jquery/dist/jquery.min.js")
         script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
         script(src="node_modules/angular/angular.min.js")
+        script(src="node_modules/angular-route/angular-route.js")
         script(src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
 
 
@@ -20,10 +21,11 @@ html
                         li
                             a(href="#") Home
                         li
-                            a(href="#") Pages
+                            a(href="#/page") Pages
 
         div(style="padding-top: 60px")
             block content
+            div(ng-view)
         script(src="javascripts/app.js")
         script(src="javascripts/ctrl.js")
         script(src="javascripts/model.js")

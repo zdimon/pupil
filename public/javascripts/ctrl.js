@@ -28,6 +28,16 @@
       };
       return refreshUsers();
     }
+  ]).controller('pageCtrl', [
+    '$scope', 'Page', function($scope, Page) {
+      var update_list;
+      update_list = function() {
+        return Page.list(function(r) {
+          return $scope.pages = r.data;
+        });
+      };
+      return update_list();
+    }
   ]);
 
 }).call(this);

@@ -6,9 +6,10 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 global.appRoot = path.resolve __dirname
 
- 
+
 routes = require './routes/index'
 users = require './routes/users'
+pages = require './routes/pages'
 
 app = express()
 
@@ -27,6 +28,7 @@ app.use express.static path.join __dirname, 'public'
 
 app.use '/', routes
 app.use '/users', users
+app.use '/pages', pages
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->

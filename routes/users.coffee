@@ -9,14 +9,14 @@ fs.exists global.appRoot + '/public/users.json', (exists)->
     if !exists
         fs.writeFile global.appRoot + '/public/users.json', '{}', (err, data)->
             console.log('Database was created!!!!')
-        
-        
+
+
 router.get '/remove/:id', (req, res, next)->
     obj = getUsers()
     delete obj[req.params.id]
     saveUsers(obj)
     res.send('ok')
-
+ 
 getUsers = ()->
     JSON.parse(fs.readFileSync(global.appRoot + '/public/users.json', 'utf8'))
 
@@ -33,12 +33,12 @@ saveUsers = (obj)->
 
 ObjectLength = (object)->
     max = 0;
-    for key in object 
+    for key in object
         console.log key
-        if  key > max 
+        if  key > max
             max = key
-        
-    
+
+
     parseInt(max)
 
 
@@ -48,16 +48,16 @@ addUser = (obj,data)->
        id = data.id
    else
        id = ObjectLength(obj) + 1
-   
 
-   obj[id] = 
+
+   obj[id] =
        id: id
        name: data.name
        email: data.email
        about: data.about
        date: data.date
        is_married: data.is_married
-   
+
 
 
 router.post '/save', (req, res, next)->

@@ -4,7 +4,7 @@
 app = require '../app'
 debug = require('debug') 'cs_pupil_start:server'
 http = require 'http'
-
+ 
 # Normalize a port into a number, string, or false.
 normalizePort = (val) ->
   port = parseInt val, 10

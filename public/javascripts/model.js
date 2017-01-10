@@ -29,6 +29,28 @@
 
   Model.$inject = ['$http'];
 
-  angular.module('pupilApp').factory('Model', Model);
+  angular.module('pupilApp').factory('Model', Model).factory('Page', [
+    '$http', '$rootScope', function($http) {
+      var del, get, list, save;
+      list = function(cb) {
+        return $http.get('/pages/list').then(cb);
+      };
+      save = function() {
+        return console.log('save');
+      };
+      del = function() {
+        return console.log('delete');
+      };
+      get = function() {
+        return console.log('get');
+      };
+      return {
+        list: list,
+        save: save,
+        del: del,
+        get: get
+      };
+    }
+  ]);
 
 }).call(this);
