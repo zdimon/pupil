@@ -8,8 +8,20 @@ angular.module('testApp', ['ui.router'])
 .config ($stateProvider, $urlRouterProvider)->
     $stateProvider
     .state 'contacts',
-        template: '<h1>My Contacts</h1>'
+        templateUrl: 'templates/contacts.html'
         url: '/contact'
+        controller: ($scope)->
+            $scope.contacts = [
+                'Dima'
+                'Vova'
+                'Roma'
+            ]
     .state 'messages',
         template: '<h1>My Messages</h1>'
         url: '/message'
+    .state 'message',
+        url: '/message/:name'
+        templateUrl: ($stateParams)->
+            return 'templates/messages-of-' + $stateParams.name + '.html'
+        controller: ($scope, $stateParams)->
+            $scope.name = $stateParams.name

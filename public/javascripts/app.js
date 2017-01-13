@@ -9,11 +9,22 @@
     }
   ]).config(function($stateProvider, $urlRouterProvider) {
     return $stateProvider.state('contacts', {
-      template: '<h1>My Contacts</h1>',
-      url: '/contact'
+      templateUrl: 'templates/contacts.html',
+      url: '/contact',
+      controller: function($scope) {
+        return $scope.contacts = ['Dima', 'Vova', 'Roma'];
+      }
     }).state('messages', {
       template: '<h1>My Messages</h1>',
       url: '/message'
+    }).state('message', {
+      url: '/message/:name',
+      templateUrl: function($stateParams) {
+        return 'templates/messages-of-' + $stateParams.name + '.html';
+      },
+      controller: function($scope, $stateParams) {
+        return $scope.name = $stateParams.name;
+      }
     });
   });
 

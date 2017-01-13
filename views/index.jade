@@ -26,6 +26,6 @@ html
 
         div(style="padding-top: 60px" ng-controller="testCtrl")
             h1 {{ message }}
-            a(href="#" ng-click="activate_contact()") Contact
+            a(href="#" ui-sref="message({name: 'dima'})") Contact of Dima
             section(ui-view)
         script(src="javascripts/app.js")
