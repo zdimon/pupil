@@ -7,6 +7,9 @@ html
         script(src="node_modules/jquery/dist/jquery.min.js")
         script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
         script(src="node_modules/angular/angular.min.js")
+        script(src="node_modules/angular-ui-router/release/angular-ui-router.min.js")
+
+
 
 
     body(ng-app="testApp")
@@ -17,10 +20,12 @@ html
                 div(class="collapse navbar-collapse")
                     ul(class="nav navbar-nav")
                         li
-                            a(href="#") Home
+                            a(ui-sref="contacts" href="#") Contacts
                         li
-                            a(href="#/page") Pages
+                            a(ui-sref="messages" href="#") Messages
 
         div(style="padding-top: 60px" ng-controller="testCtrl")
             h1 {{ message }}
+            a(href="#" ng-click="activate_contact()") Contact
+            section(ui-view)
         script(src="javascripts/app.js")
