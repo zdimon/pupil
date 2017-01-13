@@ -4,7 +4,7 @@
 
   app = require('../app');
 
-  debug = require('debug')('cs_pupil_start:server');
+  debug = require('debug')('test:server');
 
   http = require('http');
 

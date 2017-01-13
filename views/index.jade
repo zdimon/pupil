@@ -7,11 +7,9 @@ html
         script(src="node_modules/jquery/dist/jquery.min.js")
         script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
         script(src="node_modules/angular/angular.min.js")
-        script(src="node_modules/angular-route/angular-route.js")
-        script(src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
 
 
-    body(ng-app="pupilApp")
+    body(ng-app="testApp")
         nav(class="navbar navbar-inverse navbar-fixed-top")
             div(class="container")
                 div(class="navbar-header")
@@ -23,10 +21,6 @@ html
                         li
                             a(href="#/page") Pages
 
-        div(style="padding-top: 60px")
-            block content
-            div(ng-view)
+        div(style="padding-top: 60px" ng-controller="testCtrl")
+            h1 {{ message }}
         script(src="javascripts/app.js")
-        script(src="javascripts/ctrl.js")
-        script(src="javascripts/model.js")
-        script $('#date').datepicker({});
