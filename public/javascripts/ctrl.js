@@ -29,7 +29,7 @@
       return refreshUsers();
     }
   ]).controller('pageCtrl', [
-    '$scope', 'Page', function($scope, Page) {
+    '$scope', 'Page', '$location', function($scope, Page, $location) {
       var update_list;
       update_list = function() {
         return Page.list(function(r) {
