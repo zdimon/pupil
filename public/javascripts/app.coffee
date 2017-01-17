@@ -14,7 +14,7 @@ angular.module('testApp', ['ui.router'])
     $stateProvider
     .state 'admin',
         url: '/'
-        views:              
+        views:                
             '':            
                 templateUrl: 'templates/admin.html'    
             'footer-outside@admin':
@@ -54,4 +54,5 @@ angular.module('testApp', ['ui.router'])
 
     $locationProvider.html5Mode(false)
     $locationProvider.hashPrefix('')
+
 
