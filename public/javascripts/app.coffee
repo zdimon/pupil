@@ -14,16 +14,7 @@ angular.module('testApp', ['ui.router'])
     $stateProvider
     .state 'admin',
         url: '/'
-        #templateUrl: 'templates/admin.html'
-        views:
-            #'home-menu@admin.home':
-            #    template: '<h3>Users</h3>'    
-            #'log@admin.users':
-            #    template: '<div class="col-md-2 well">log</div>'    
-            #'@admin.users':        
-            #    templateUrl: 'templates/admin-users.html' 
-            #'@admin.messages':        
-            #    templateUrl: 'templates/admin-messages.html'                 
+        views:              
             '':            
                 templateUrl: 'templates/admin.html'    
             'footer-outside@admin':
