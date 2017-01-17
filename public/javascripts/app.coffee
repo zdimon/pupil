@@ -96,5 +96,5 @@ angular.module('testApp', ['ui.router'])
 
             $rootScope.$on '$stateChangeSuccess', (evt,next,current)->
                 console.log "from #{current.url} to #{next.url}"
-                console.dir evt
+                console.dir evt 
 ]
