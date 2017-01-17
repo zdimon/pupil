@@ -12,6 +12,16 @@
     });
   });
 
+  router.get('/get_messages', function(req, res, next) {
+    return res.send([
+      {
+        message: 'Hello'
+      }, {
+        message: 'Everybody'
+      }
+    ]);
+  });
+
   module.exports = router;
 
 }).call(this);

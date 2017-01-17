@@ -3,7 +3,7 @@
 # Module dependencies.
 app = require '../app'
 debug = require('debug') 'test:server'
-http = require 'http'
+http = require 'http' 
 
 # Normalize a port into a number, string, or false.
 normalizePort = (val) ->
