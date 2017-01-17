@@ -11,106 +11,57 @@
       };
     }
   ]).config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-    var isAuth;
     $stateProvider.state('admin', {
-      url: '/admin',
-      templateUrl: 'templates/admin.html',
-      controller: function($scope) {
-        return $scope.messages = [
-          {
-            text: 'one'
-          }, {
-            text: 'two'
-          }, {
-            text: 'tree'
-          }
-        ];
-      }
-    }).state('users', {
-      url: '/users',
-      parent: 'admin',
-      templateUrl: 'templates/admin-users.html',
-      controller: function($scope) {
-        return $scope.users = [
-          {
-            name: 'wezom'
-          }
-        ];
-      }
-    }).state('detail', {
-      url: '/user/detail/:id',
-      parent: 'admin',
-      templateUrl: 'templates/admin-users-detail.html',
-      controller: function($scope, $stateParams) {
-        return $scope.user_id = $stateParams.id;
-      }
-    }).state('contacts', {
-      templateUrl: 'templates/contacts.html',
-      url: '/contact',
-      controller: function($scope) {
-        return $scope.contacts = ['Dima', 'Vova', 'Roma'];
-      }
-    }).state('messages', {
-      template: '<h1>My Messages</h1>',
-      url: '/message'
-    }).state('message', {
-      resolve: {
-        messages: function($http) {
-          return $http({
-            method: 'GET',
-            url: '/get_messages'
-          }).then(function(res) {
-            var messages;
-            return messages = res.data;
-          });
-        }
-      },
-      data: {
-        customData: 'one'
-      },
-      onEnter: isAuth,
-      url: '/message/:name',
-      templateUrl: function($stateParams) {
-        return 'templates/messages-of-' + $stateParams.name + '.html';
-      },
-      controller: function($scope, $stateParams, $state, messages) {
-        $scope.name = $stateParams.name;
-        $scope.messages = messages;
-        return console.log($state.current.data.customData);
-      },
+      url: '/',
       views: {
         '': {
-          template: '<h1> Messages </h1>'
+          templateUrl: 'templates/admin.html'
         },
-        myw: {
-          controller: function() {
-            return console.log('view 1');
-          },
-          template: '<h1> My template </h1>'
+        'footer-outside@admin': {
+          template: '<div class="col-md-12 well">Outside footer Copyright @wezom@</div>'
         }
       }
+    }).state('admin.home', {
+      url: 'home',
+      views: {
+        'menu': {
+          template: '<h3>Home menu</h3>'
+        },
+        '': {
+          templateUrl: 'templates/admin-home.html'
+        },
+        'footer-inside@admin.home': {
+          template: '<div class="col-md-12 well">Inside footer Copyright @wezom@</div>'
+        }
+      }
+    }).state('admin.users', {
+      url: 'users',
+      views: {
+        'menu': {
+          template: '<h3>User menu</h3>'
+        },
+        '': {
+          templateUrl: 'templates/admin-users.html'
+        }
+      }
+    }).state('admin.messages', {
+      url: 'messages',
+      views: {
+        'menu': {
+          template: '<h3>Message menu</h3>'
+        },
+        '': {
+          templateUrl: 'templates/admin-messages.html'
+        }
+      }
+    }).state('admin.404', {
+      url: '404',
+      templateUrl: 'templates/404.html'
     });
-    isAuth = function($http) {
-      return $http({
-        method: 'GET',
-        url: '/is_auth'
-      }).then(function(res) {
-        return console.log(res.data);
-      });
-    };
+    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.otherwise('/404');
     $locationProvider.html5Mode(false);
     return $locationProvider.hashPrefix('');
-  }).run([
-    '$rootScope', function($rootScope) {
-      $rootScope.$on('$stateChangeStart', function(evt, next, current) {
-        console.log("from " + current.url + " to " + next.url);
-        return console.dir(current);
-      });
-      return $rootScope.$on('$stateChangeSuccess', function(evt, next, current) {
-        console.log("from " + current.url + " to " + next.url);
-        return console.dir(evt);
-      });
-    }
-  ]);
+  });
 
 }).call(this);

@@ -27,10 +27,6 @@ html
                             a(ui-sref="admin" href="#") Admin                            
 
         div(style="padding-top: 60px" ng-controller="testCtrl")
-            h1 {{ message }}
-            a(href="#" ui-sref="message({name: 'dima'})") Contact of Dima
-            p
-                a(href="#" ng-click="to_home()") Home
             section(ui-view)
-            section(ui-view="myw")
+
         script(src="javascripts/app.js")

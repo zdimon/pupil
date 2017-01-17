@@ -1,14 +1,37 @@
-<h1> Admin </h2>
-
-<ul>
-    <li ui-sref-active="active">
-        <a ui-sref="users" ui-sref-active="active" href="#">Users</a>
-    </li>
-    <li >
-        <a ui-sref="detail" ui-sref-active="active" href="#">Detail</a>
-    </li>
-<ul>
+<h1> Admin index template </h2>
 
 
+		<nav class="navbar navbar-default">
+         <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li ui-sref-active="active"><a ui-sref="admin.home" href="#">Home</a></li>
+              <li ui-sref-active="active"><a ui-sref="admin.users">Users</a></li>
+              <li ui-sref-active="active"><a ui-sref="admin.messages">Messages</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </nav>  
 
-<div ui-view></div>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-2 well">
+        <div ui-view="menu"></div>
+    </div>
+    <div class="col-md-10">
+        <div ui-view></div>
+    </div>
+  </div>
+
+  <div ui-view="log"></div>
+
+
+</div>
+
+<div ui-view="status"></div>
+
+<div class="container">
+   <div class="row">
+      <div ui-view="footer-outside"></div>
+  </div>
+</div>

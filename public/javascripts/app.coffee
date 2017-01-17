@@ -13,88 +13,54 @@ angular.module('testApp', ['ui.router'])
 .config ($stateProvider, $urlRouterProvider, $locationProvider)->
     $stateProvider
     .state 'admin',
-        url: '/admin'
-        templateUrl: 'templates/admin.html'
-        controller: ($scope)->
-            $scope.messages = [
-                { text: 'one' }
-                { text: 'two' }
-                { text: 'tree' }
-            ]
-    .state 'users',
-        url: '/users'
-        parent: 'admin'
-        templateUrl: 'templates/admin-users.html'
-        controller: ($scope)->
-            $scope.users = [
-                name: 'wezom'
-            ]
-    .state 'detail',
-        url: '/user/detail/:id'
-        parent: 'admin'
-        templateUrl: 'templates/admin-users-detail.html'
-        controller: ($scope, $stateParams)->
-            $scope.user_id = $stateParams.id
-
-    .state 'contacts',
-        templateUrl: 'templates/contacts.html'
-        url: '/contact'
-        controller: ($scope)->
-            $scope.contacts = [
-                'Dima'
-                'Vova'
-                'Roma'
-            ]
-    .state 'messages',
-        template: '<h1>My Messages</h1>'
-        url: '/message'
-    .state 'message',
-        resolve:
-            messages:  ($http)->
-                $http
-                    method: 'GET'
-                    url: '/get_messages'
-                .then (res)->
-                    messages = res.data
-        data:
-            customData: 'one'
-        onEnter: isAuth
-        url: '/message/:name'
-        templateUrl: ($stateParams)->
-            return 'templates/messages-of-' + $stateParams.name + '.html'
-        controller: ($scope, $stateParams, $state, messages)->
-            $scope.name = $stateParams.name
-            $scope.messages = messages
-            console.log $state.current.data.customData
+        url: '/'
+        #templateUrl: 'templates/admin.html'
         views:
-            '':
-                template: '<h1> Messages </h1>'
-            myw:
-                controller: ()->
-                    console.log 'view 1'
-                template: '<h1> My template </h1>'
+            #'home-menu@admin.home':
+            #    template: '<h3>Users</h3>'    
+            #'log@admin.users':
+            #    template: '<div class="col-md-2 well">log</div>'    
+            #'@admin.users':        
+            #    templateUrl: 'templates/admin-users.html' 
+            #'@admin.messages':        
+            #    templateUrl: 'templates/admin-messages.html'                 
+            '':            
+                templateUrl: 'templates/admin.html'    
+            'footer-outside@admin':
+                template: '<div class="col-md-12 well">Outside footer Copyright @wezom@</div>'                   
+                                                
+    .state 'admin.home',
+        url: 'home'
+        views:
+            'menu':
+                template: '<h3>Home menu</h3>'    
+            '':            
+                templateUrl: 'templates/admin-home.html'                   
+            'footer-inside@admin.home':
+                template: '<div class="col-md-12 well">Inside footer Copyright @wezom@</div>'    
 
-    isAuth = ($http)->
-        $http
-            method: 'GET'
-            url: '/is_auth'
-        .then (res)->
-            console.log res.data
+    .state 'admin.users',
+        url: 'users' 
+        views:
+            'menu':
+                template: '<h3>User menu</h3>'    
+            '':            
+                templateUrl: 'templates/admin-users.html'  
+    .state 'admin.messages',
+        url: 'messages'
+        views:
+            'menu':
+                template: '<h3>Message menu</h3>'    
+            '':            
+                templateUrl: 'templates/admin-messages.html' 
 
+    .state 'admin.404',
+        url: '404'
+        templateUrl: 'templates/404.html'
 
+    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(false)
     $locationProvider.hashPrefix('')
 
-.run [
-        '$rootScope'
-        ($rootScope)->
-            $rootScope.$on '$stateChangeStart', (evt,next,current)->
-                console.log "from #{current.url} to #{next.url}"
-                console.dir current
-
-
-            $rootScope.$on '$stateChangeSuccess', (evt,next,current)->
-                console.log "from #{current.url} to #{next.url}"
-                console.dir evt
-]
