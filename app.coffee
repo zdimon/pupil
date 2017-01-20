@@ -4,8 +4,19 @@ favicon = require 'serve-favicon'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
-
+global.appRoot = path.resolve __dirname
 routes = require './routes/index'
+
+#######creating simlink########################
+fs = require 'fs'
+exec = require('child_process').exec;
+fs.lstat global.appRoot+'/public/node_modules', (err, stats)->
+    if err
+        cmd = "ln -s #{global.appRoot}/node_modules public/node_modules"
+        exec cmd, (err,stdout, stdin)->
+            console.log stdout
+            console.log 'create simlink'
+###############################################
 
 
 app = express()

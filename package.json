@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www.js"
+    "start": "coffee -c .; nodemon ./bin/www.js"
   },
   "dependencies": {
     "angular": "^1.6.1",
