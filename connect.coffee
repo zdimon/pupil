@@ -10,6 +10,6 @@ app
     next()
 .use (req,res,next)->
     res.write JSON.stringify {x: 10, y: 40}
-    res.end()
+    res.end() 
     
 http.createServer(app).listen(8080)
