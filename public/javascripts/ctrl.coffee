@@ -41,8 +41,9 @@ angular
 .controller 'pageCtrl', [
     '$scope'
     'Page'
-    ($scope, Page)->
-
+    '$location'
+    ($scope, Page, $location)->
+        #$location.path('/').replace()
         update_list = ()->
             Page.list (r)->
                 $scope.pages = r.data
