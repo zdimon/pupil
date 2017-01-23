@@ -23,7 +23,7 @@
     .use (req,res,next)->
         res.end {x: 10, y: 40}
 
-<<<<<<< HEAD
+
 ##URL handler
 
     .use '/auth', (req,res,next)->
@@ -104,8 +104,3 @@
     # module.exports.is_auth = is_auth
 
 
-
-
-=======
-##
->>>>>>> 27e1beb00bb811ee6ad32c2032d9f00435224adb
