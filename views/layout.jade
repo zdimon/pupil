@@ -22,6 +22,18 @@ html
                             a(href="#") Home
                         li
                             a(href="#/page") Pages
+                
+                form(class="navbar-form navbar-right" ng-controller="loginCtrl" ng-show="!is_authenticated")
+                    span(style="color: red" ng-show="is_error") {{ error_message }}
+                    div.form-group
+                        input(type="text" ng-model="username")
+
+                    div.form-group
+                        input(type="password" ng-model="password")
+                   
+                    div.form-group
+                        button(type="submit" name="enter" class="btn btn-success" ng-click="login()") Signin
+
 
         div(style="padding-top: 60px")
             block content

@@ -49,3 +49,42 @@ angular
                 $scope.pages = r.data
         update_list()
     ]
+
+
+
+.controller 'loginCtrl', [
+    '$scope'
+    'LoginService'
+    ($scope, LoginService)->
+        $scope.login = ()->
+            #console.log LoginFactory
+            LoginService.login $scope.username, $scope.password, (rez)->
+                $scope.message = rez.data
+                
+                if not $scope.message.success
+                    console.log $scope.message
+                    $scope.is_error = true
+                    $scope.error_message = $scope.message.message
+                else
+                    $scope.is_authenticated = true
+            
+    ]
+
+.factory 'LoginFactory', ($http)->
+    login = (login,password,callback)->
+        data = {name: login, password: password}
+        $http.post('/login', data).then callback
+    return {login: login}
+
+
+.service 'LoginService', [ '$http', class Login
+        constructor: (@$http)->
+        login: (login,password,callback)->
+            data = {name: login, password: password}
+            @$http.post('/login', data).then callback
+    ]
+
+
+
+
+

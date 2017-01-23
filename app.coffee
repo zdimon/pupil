@@ -9,6 +9,15 @@ color = require 'cli-color'
 fs = require 'fs'
 exec = require('child_process').exec;
 
+jwt = require 'jsonwebtoken'
+mongoose = require 'mongoose'
+config = require './config'
+User = require './user_model'
+mongoose.connect config.database
+
+console.log config
+
+
 
 routes = require './routes/index'
 users = require './routes/users'
@@ -49,9 +58,88 @@ app.use bodyParser.urlencoded
 app.use cookieParser()
 app.use express.static path.join __dirname, 'public'
 
+
+apiRoutes = express.Router()
+apiRoutes.use (req, res, next)->
+    token = req.body.token || req.query.token || req.headers['x-access-token']
+  
+    if token
+        jwt.verify token, 'secret', (err, decoded)->
+            if err
+                res.json
+                    success: false
+                    message: 'Failed to authenticate token'
+            else
+                # if everything is good, save to request for use in other routes
+                req.decoded = decoded 
+                next()
+    else
+        res.status(403).send 
+            success: false
+            message: 'No token provided.' 
+    
+app.use('/api', apiRoutes);
+
 app.use '/', routes
 app.use '/users', users
 app.use '/pages', pages
+
+
+app.get '/setup', (req, res)->
+
+    #create a sample user 
+    dima = new User  
+        name: 'Dima' 
+        password: '123'
+        admin: true 
+        
+
+    #save the sample user
+    dima.save (err)->
+        if err
+            throw err 
+
+        console.log 'User saved successfully'
+        res.json { success: true }
+
+
+app.get '/allusers', (req, res)->
+    User.find {}, (err, users)-> 
+        res.json users
+
+
+app.post '/login', (req, res)->
+    #find the user
+    console.log req.body.name
+    User.findOne 
+        name: req.body.name
+    , (err, user)-> 
+        if err
+            throw err
+
+        if not user 
+            res.json 
+                success: false
+                message: 'Authentication failed. User not found.'
+        else if user
+
+            #check if password matches
+            if user.password != req.body.password
+                res.json 
+                    success: false
+                    message: 'Authentication failed. Wrong password.'
+            else
+                # create a token
+                token = jwt.sign user, 'secret', {
+                      expiresIn: '2 days'
+                }
+
+                # return the information including token as JSON
+                res.json 
+                  success: true
+                  message: 'Enjoy your token!'
+                  token: token
+
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
