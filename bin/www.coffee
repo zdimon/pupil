@@ -4,7 +4,7 @@
 app = require '../app'
 debug = require('debug') 'cs_pupil_start:server'
 http = require 'http'
- 
+reload = require 'reload'
 # Normalize a port into a number, string, or false.
 normalizePort = (val) ->
   port = parseInt val, 10
@@ -48,8 +48,10 @@ app.set 'port', port
 
 # Create HTTP server.
 server = http.createServer app
-
+reload server, app, true
 # Listen on provided port, on all network interfaces.
 server.listen port
 server.on 'error', onError
+
 server.on 'listening', onListening
+

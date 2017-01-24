@@ -7,17 +7,17 @@ bodyParser = require 'body-parser'
 global.appRoot = path.resolve __dirname
 color = require 'cli-color'
 fs = require 'fs'
-exec = require('child_process').exec;
+exec = require('child_process').exec;    
 
 jwt = require 'jsonwebtoken'
 mongoose = require 'mongoose'
 config = require './config'
-User = require './user_model'
+User = require './user_model' 
 mongoose.connect config.database
+  
+console.log config  
 
-console.log config
-
-
+ 
 
 routes = require './routes/index'
 users = require './routes/users'
