@@ -66,6 +66,11 @@ $location.path('/') - change the path.
        
     $locationProvider.hashPrefix('') - remove !
 
+##Default path.    
+
+    $urlRouterProvider.when('', '/');
+
+    $urlRouterProvider.otherwise('/404');
 
     doctype html
     html
@@ -199,4 +204,191 @@ The callbacks also have access to all the resolved dependencies.
                     console.log "from #{current.url} to #{next.url}"
                     console.dir evt
     ]
-                    
+                 
+## Nesteed states and views
+
+    .state 'admin',
+        templateUrl: 'templates/admin.html'
+
+    .state 'admin.users',
+        url: '/admin/users'
+        templateUrl: 'templates/admin-users.html'
+        
+        
+    .state 'admin',
+        templateUrl: 'templates/admin.html'
+
+or
+
+    .state 'users',
+        url: '/admin/users'
+        parent: 'admin'
+        templateUrl: 'templates/admin-users.html'        
+        
+##Views
+
+    ---admin.html    
+    
+    <h1> Admin </h2>
+    <div ui-view></div>
+    
+    
+    ---admin-users.html
+    
+    <h2> Admin users </h2>
+
+    <ul>
+        <li ng-repeat="u in users">{{u.name}}</li>
+    </ul>
+
+
+    <h2> Admin messages </h2>
+
+    <ul>
+        <li ng-repeat="m in messages">{{m.text}}</li>
+    </ul>
+    
+    
+    
+##Controllers
+
+    .state 'admin',
+        templateUrl: 'templates/admin.html'
+        controller: ($scope)->
+            $scope.messages = [
+                text: 'one'
+                text: 'two'
+                text: 'tree'
+            ]
+    .state 'users',
+        url: '/admin/users'
+        parent: 'admin'
+        templateUrl: 'templates/admin-users.html'
+        controller: ($scope)->
+            $scope.users = [
+                name: 'wezom'
+            ]    
+        
+        
+##Child states will inherit **resolved** dependencies and **data** from parent state        
+
+##Parameters
+
+    .state 'detail',
+        url: '/user/detail/:id'
+        parent: 'admin'
+        templateUrl: 'templates/admin-users-detail.html'
+        controller: ($scope, $stateParams)->
+            $scope.user_id = $stateParams.id
+            
+Template
+
+    <a ui-sref="detail({id: 23})"> Detail </a>    
+    
+Indicate active view.
+
+    <li ui-sref-active="active">
+        <a ui-sref="posts.details">Posts</a>
+    </li>       
+                        
+
+##Multiviews
+
+    .state 'admin',
+        url: '/'
+        templateUrl: 'templates/admin.html'
+    .state 'admin.home',
+        url: 'home'
+        templateUrl: 'templates/admin-home.html'               
+    .state 'admin.users',
+        url: 'users'
+        templateUrl: 'templates/admin-users.html'            
+    .state 'admin.messages',
+        url: 'messages'
+        templateUrl: 'templates/admin-messages.html'        
+    .state 'admin.404',
+        url: '404'
+        templateUrl: 'templates/404.html'
+
+
+    # admin.html
+    
+
+
+
+    <h1> Admin index template </h2>
+
+
+            <nav class="navbar navbar-default">
+             <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li ui-sref-active="active"><a ui-sref="admin.home" href="#">Home</a></li>
+                  <li ui-sref-active="active"><a ui-sref="admin.users">Users</a></li>
+                  <li ui-sref-active="active"><a ui-sref="admin.messages">Messages</a></li>
+                </ul>
+              </div><!--/.nav-collapse -->
+            </nav>  
+
+
+    <div class="well">
+        <div ui-view></div>
+    </div>
+
+
+Absolute path.
+
+
+    .config ($stateProvider, $urlRouterProvider, $locationProvider)->
+        $stateProvider
+        .state 'admin',
+            url: '/'
+            views:               
+                '':            
+                    templateUrl: 'templates/admin.html'    
+                'footer-outside@admin':
+                    template: '<div class="col-md-12 well">Outside footer Copyright @wezom@</div>'                   
+                                                    
+        .state 'admin.home',
+            url: 'home'
+            views:
+                'menu':
+                    template: '<h3>Home menu</h3>'    
+                '':            
+                    templateUrl: 'templates/admin-home.html'                   
+                'footer-inside@admin.home':
+                    template: '<div class="col-md-12 well">Inside footer Copyright @wezom@</div>'    
+
+        .state 'admin.users',
+            url: 'users' 
+            views:
+                'menu':
+                    template: '<h3>User menu</h3>'    
+                '':            
+                    templateUrl: 'templates/admin-users.html'  
+        .state 'admin.messages',
+            url: 'messages'
+            views:
+                'menu':
+                    template: '<h3>Message menu</h3>'    
+                '':            
+                    templateUrl: 'templates/admin-messages.html' 
+
+        .state 'admin.404',
+            url: '404'
+        templateUrl: 'templates/404.html'
+
+    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.otherwise('/404');
+
+    $locationProvider.html5Mode(false)
+    $locationProvider.hashPrefix('')
+
+
+    ##inner template
+
+    <h1> Admin home </h2>
+
+
+     <div ui-view="footer-inside"></div>
+
+

@@ -8,7 +8,7 @@
     app
     .use (req,res,next)->
         console.log 'one'
-    
+
     http.createServer(app).listen(8080)
 
 
@@ -23,6 +23,7 @@
     .use (req,res,next)->
         res.end {x: 10, y: 40}
 
+
 ##URL handler
 
     .use '/auth', (req,res,next)->
@@ -30,7 +31,7 @@
 
 ##Adding services
 
-###Compression 
+###Compression
 
     npm install compression --save
 
@@ -43,9 +44,9 @@
     .use logger()
 
 ###Static files
-    
+
     npm install serve-static --save
-    
+
     .use serveStatic(__dirname)
 
 ###Cookie
@@ -64,11 +65,11 @@
 
     npm install cookie-session --save
 
-    .use cookieSession 
+    .use cookieSession
         key: 'my_key'
         secret: 'sekret'
         maxAge: 60*60*24
-        
+
     ###add
     .use '/sess_add', (req,res,next)->
         req.session.foo = 'Hello'
@@ -87,7 +88,7 @@
     module.export is_auth = (pars)->
         ()->
             consolw.log pars
-        
+
 
 
     is_auth = (pars)->
@@ -101,7 +102,3 @@
 
     # module.exports = is_auth()
     # module.exports.is_auth = is_auth
-
-
-
-
