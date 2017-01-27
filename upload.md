@@ -69,7 +69,13 @@ https://www.npmjs.com/package/multer
 
     multer  = require 'multer'
     upload = multer
-        dest: 'uploads/'
         storage: storage
+
+
+##Progress bar
+
+    div Queue progress:
+        div.progress
+            div(class="progress-bar" role="progressbar" ng-style="{{ 'width': uploader.progress + '%' }}")
 
 

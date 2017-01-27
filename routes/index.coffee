@@ -11,7 +11,6 @@ storage = multer.diskStorage
 
 upload = multer
     storage: storage
-    dest: 'uploads/'
     #rename:  (fieldname, filename)->
     #    filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
 

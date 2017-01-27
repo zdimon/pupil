@@ -88,7 +88,9 @@
     })()
   ]).controller('uploadCtrl', [
     '$scope', 'FileUploader', function($scope, FileUploader) {
-      return $scope.uploader = new FileUploader();
+      return $scope.uploader = new FileUploader({
+        url: '/upload'
+      });
     }
   ]).controller('fbCtrl', [
     '$scope', '$firebaseObject', '$firebaseArray', function($scope, $firebaseObject, $firebaseArray) {

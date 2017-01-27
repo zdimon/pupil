@@ -18,8 +18,7 @@
   });
 
   upload = multer({
-    storage: storage,
-    dest: 'uploads/'
+    storage: storage
   });
 
   router.get('/', function(req, res, next) {

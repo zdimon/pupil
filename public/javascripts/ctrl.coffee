@@ -88,7 +88,8 @@ angular
 .controller 'uploadCtrl', [
     '$scope', 'FileUploader',
     ($scope, FileUploader)->
-         $scope.uploader = new FileUploader()
+         $scope.uploader = new FileUploader
+            url: '/upload'
     ]
 
 

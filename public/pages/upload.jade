@@ -9,3 +9,7 @@ form
 
 
     button(ng-click="upload()" class="btn btn-success") Go
+
+div Queue progress:
+    div.progress
+        div(class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }")
