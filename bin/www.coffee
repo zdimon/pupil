@@ -3,7 +3,7 @@
 # Module dependencies.
 app = require '../app'
 debug = require('debug') 'test:server'
-http = require 'http' 
+http = require 'http'
 
 # Normalize a port into a number, string, or false.
 normalizePort = (val) ->
@@ -48,6 +48,9 @@ app.set 'port', port
 
 # Create HTTP server.
 server = http.createServer app
+
+io = require('socket.io')(server);
+sock = require('../sock')(io);
 
 # Listen on provided port, on all network interfaces.
 server.listen port
