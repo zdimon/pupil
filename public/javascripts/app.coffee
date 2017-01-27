@@ -1,66 +1,33 @@
-angular.module('testApp', ['ui.router'])
-.controller 'testCtrl', [
+angular.module('chatApp', ['ui.router'])
+.controller 'chatCtrl', [
     '$scope', '$state', '$location', ($scope, $state, $location)->
-        $scope.message = 'Hello from Angular'
-        $scope.activate_contact = ()->
-            $state.go('contacts')
-
-        $scope.to_home = ()->
-            $location.path('/').replace()
-
 
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider)->
     $stateProvider
-    .state 'admin',
+    .state 'chat',
         url: '/'
-        #templateUrl: 'templates/admin.html'
-        views:
-            #'home-menu@admin.home':
-            #    template: '<h3>Users</h3>'    
-            #'log@admin.users':
-            #    template: '<div class="col-md-2 well">log</div>'    
-            #'@admin.users':        
-            #    templateUrl: 'templates/admin-users.html' 
-            #'@admin.messages':        
-            #    templateUrl: 'templates/admin-messages.html'                 
-            '':            
-                templateUrl: 'templates/admin.html'    
-            'footer-outside@admin':
-                template: '<div class="col-md-12 well">Outside footer Copyright @wezom@</div>'                   
-                                                
-    .state 'admin.home',
-        url: 'home'
-        views:
-            'menu':
-                template: '<h3>Home menu</h3>'    
-            '':            
-                templateUrl: 'templates/admin-home.html'                   
-            'footer-inside@admin.home':
-                template: '<div class="col-md-12 well">Inside footer Copyright @wezom@</div>'    
+        templateUrl: 'templates/chat.html'
 
-    .state 'admin.users',
-        url: 'users' 
+    .state 'chat.index',
+        url: 'index'
         views:
-            'menu':
-                template: '<h3>User menu</h3>'    
-            '':            
-                templateUrl: 'templates/admin-users.html'  
-    .state 'admin.messages',
-        url: 'messages'
-        views:
-            'menu':
-                template: '<h3>Message menu</h3>'    
-            '':            
-                templateUrl: 'templates/admin-messages.html' 
+            '':
+                templateUrl: 'templates/chat-index.html'
+            'user-online':
+                templateUrl: 'templates/chat-user-online.html'
 
-    .state 'admin.404',
+
+    .state 'chat.history',
+        url: 'users'
+        templateUrl: 'templates/chat-history.html'
+
+    .state 'chat.404',
         url: '404'
         templateUrl: 'templates/404.html'
 
-    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.when('', '/index');
     $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(false)
     $locationProvider.hashPrefix('')
-
