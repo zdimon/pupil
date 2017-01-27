@@ -10,6 +10,10 @@ html
         script(src="node_modules/angular-route/angular-route.js")
         script(src="node_modules/angular-middleware/dist/angular-middleware.min.js")
         script(src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
+        script(src="node_modules/angular-file-upload/dist/angular-file-upload.min.js")
+        script(src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js")
+        script(src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js")
+        script(src="http://wzrd.in/standalone/uuid@latest")
 
 
     body(ng-app="pupilApp")
@@ -23,7 +27,12 @@ html
                             a(href="#") Home
                         li
                             a(href="#/page") Pages
-                
+                        li
+                            a(href="#/upload") Upload file
+                        li
+                            a(href="#/fb") Firebase
+
+
                 form(class="navbar-form navbar-right" ng-controller="loginCtrl" ng-show="!is_authenticated")
                     span(style="color: red" ng-show="is_error") {{ error_message }}
                     div.form-group
@@ -31,7 +40,7 @@ html
 
                     div.form-group
                         input(type="password" ng-model="password")
-                   
+
                     div.form-group
                         button(type="submit" name="enter" class="btn btn-success" ng-click="login()") Signin
 

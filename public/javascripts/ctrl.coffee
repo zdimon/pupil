@@ -60,14 +60,14 @@ angular
             #console.log LoginFactory
             LoginService.login $scope.username, $scope.password, (rez)->
                 $scope.message = rez.data
-                
+
                 if not $scope.message.success
                     console.log $scope.message
                     $scope.is_error = true
                     $scope.error_message = $scope.message.message
                 else
                     $scope.is_authenticated = true
-            
+
     ]
 
 .factory 'LoginFactory', ($http)->
@@ -85,6 +85,57 @@ angular
     ]
 
 
+.controller 'uploadCtrl', [
+    '$scope', 'FileUploader',
+    ($scope, FileUploader)->
+         $scope.uploader = new FileUploader()
+    ]
 
 
+.controller 'fbCtrl', [
+    '$scope', '$firebaseObject', '$firebaseArray',
+    ($scope, $firebaseObject, $firebaseArray)->
 
+        config =
+            apiKey: 'AIzaSyBo4BEA7jAy7bGdKjjgrOYl9Ug6kVFy77E'
+            authDomain: 'firstprj-2238d.firebaseapp.com'
+            databaseURL: 'https://firstprj-2238d.firebaseio.com/'
+
+        firebase.initializeApp config
+
+        ref = firebase.database().ref()
+        $scope.data = $firebaseArray(ref)
+
+        ref = firebase.database().ref().child("log")
+        $scope.log = $firebaseArray(ref);
+        #syncObject.$bindTo($scope, "log");
+        console.log $scope.log
+        $scope.add = ()->
+            $scope.log.$add
+                title: $scope.title
+                time: $scope.time
+        $scope.remove = (id)->
+            $scope.log.$remove $scope.log.$getRecord(id)
+        $scope.remove_all = (id)->
+            firebase.database().ref().child("log").remove()
+        $scope.edit = (id,key)->
+            r = $scope.log.$getRecord(id)
+            r.title = $scope.log[key].title
+            $scope.log.$save(r)
+
+        $scope.$watch 'log', ()->
+            angular.forEach $scope.log, (v,k)->
+                r = $scope.log.$getRecord(v.$id)
+                r.title = $scope.log[k].title
+                $scope.log.$save(r)
+                console.log k
+        , true
+
+
+        ###
+        $scope.log = [
+                        {id: 1, title: 'test', time: '12-00'},
+                        {id: 1, title: 'test', time: '12-00'},
+                       ]
+        ###
+    ]

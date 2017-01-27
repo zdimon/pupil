@@ -1,14 +1,14 @@
-angular.module('pupilApp', ['ngRoute', 'ngRoute.middleware'])
+angular.module('pupilApp', ['ngRoute', 'ngRoute.middleware', 'angularFileUpload', 'firebase'])
 .config ($routeProvider,$locationProvider, $middlewareProvider)->
 
     $middlewareProvider
-    .map 
+    .map
         'log': [ '$log', ($log)->
             $log.debug(this.params)
             this.next()
         ]
- 
-    $routeProvider 
+
+    $routeProvider
     .when '/',
         templateUrl : 'pages/users.html'
         controller  : 'userCtrl'
@@ -16,7 +16,13 @@ angular.module('pupilApp', ['ngRoute', 'ngRoute.middleware'])
         templateUrl : 'pages/page.html'
         controller  : 'pageCtrl'
         middleware: 'log'
+    .when '/upload',
+        templateUrl : 'pages/upload.html'
+        controller  : 'uploadCtrl'
+    .when '/fb',
+        templateUrl : 'pages/fb.html'
+        controller  : 'fbCtrl'
     .otherwise
-        redirectTo: '/'
+        redirectTo: '/' 
 
     $locationProvider.hashPrefix('')

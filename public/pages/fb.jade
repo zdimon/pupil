@@ -1,0 +1,30 @@
+h1 Firebase
+
+TABLE.table
+    thead
+        tr
+            th #
+            th Заголовок
+            th Действия
+            th Действия
+    tbody
+        tr(ng-repeat="(key,l) in log")
+            td
+                {{ key }}
+            td
+                input(ng-model="l.title ")
+            td
+                {{ l.time }}
+
+            td
+                a(ng-click="remove(l.$id)") Delete
+                a(ng-click="edit(l.$id,key)") Edit
+
+a(ng-click="remove_all()") Remove all
+
+
+input(ng-model="title")
+input(ng-model="time")
+a(ng-click="add()") Add
+
+{{ log }}

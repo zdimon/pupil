@@ -1,0 +1,1 @@
+<h1>upload</h1><form><input type="file" nv-file-select="nv-file-select" uploader="uploader"/><ul><li ng-repeat="item in uploader.queue">Name:<span ng-bind="item.file.name"></span><button ng-click="item.upload()">upload</button></li></ul><button ng-click="upload()" class="btn btn-success">Go</button></form>

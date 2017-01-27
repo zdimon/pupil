@@ -86,6 +86,59 @@
       return Login;
 
     })()
+  ]).controller('uploadCtrl', [
+    '$scope', 'FileUploader', function($scope, FileUploader) {
+      return $scope.uploader = new FileUploader();
+    }
+  ]).controller('fbCtrl', [
+    '$scope', '$firebaseObject', '$firebaseArray', function($scope, $firebaseObject, $firebaseArray) {
+      var config, ref;
+      config = {
+        apiKey: 'AIzaSyBo4BEA7jAy7bGdKjjgrOYl9Ug6kVFy77E',
+        authDomain: 'firstprj-2238d.firebaseapp.com',
+        databaseURL: 'https://firstprj-2238d.firebaseio.com/'
+      };
+      firebase.initializeApp(config);
+      ref = firebase.database().ref();
+      $scope.data = $firebaseArray(ref);
+      ref = firebase.database().ref().child("log");
+      $scope.log = $firebaseArray(ref);
+      console.log($scope.log);
+      $scope.add = function() {
+        return $scope.log.$add({
+          title: $scope.title,
+          time: $scope.time
+        });
+      };
+      $scope.remove = function(id) {
+        return $scope.log.$remove($scope.log.$getRecord(id));
+      };
+      $scope.remove_all = function(id) {
+        return firebase.database().ref().child("log").remove();
+      };
+      $scope.edit = function(id, key) {
+        var r;
+        r = $scope.log.$getRecord(id);
+        r.title = $scope.log[key].title;
+        return $scope.log.$save(r);
+      };
+      return $scope.$watch('log', function() {
+        return angular.forEach($scope.log, function(v, k) {
+          var r;
+          r = $scope.log.$getRecord(v.$id);
+          r.title = $scope.log[k].title;
+          $scope.log.$save(r);
+          return console.log(k);
+        });
+      }, true);
+
+      /*
+      $scope.log = [
+                      {id: 1, title: 'test', time: '12-00'},
+                      {id: 1, title: 'test', time: '12-00'},
+                     ]
+       */
+    }
   ]);
 
 }).call(this);
