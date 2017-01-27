@@ -1,0 +1,16 @@
+script(type="text/ng-template" id="chat.html")
+
+	nav(class="navbar navbar-default")
+		div( id="navbar" class="navbar-collapse collapse")
+			ul(class="nav navbar-nav navbar-right")
+				li(ui-sref-active="active")
+					a(ui-sref="chat.index" href="#") Home
+				li(ui-sref-active="active")
+					a(ui-sref="chat.history") History
+
+
+
+	div.container
+		div.row
+			div(ui-view="user-online")
+			div(ui-view)

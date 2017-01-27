@@ -8,6 +8,8 @@ html
         script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
         script(src="node_modules/angular/angular.min.js")
         script(src="node_modules/angular-ui-router/release/angular-ui-router.min.js")
+        script(src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js")
+        script(src="node_modules/angular-socket-io/socket.min.js")
         base(href="/")
 
 
@@ -21,5 +23,11 @@ html
 
         div(style="padding-top: 60px" ng-controller="chatCtrl")
             section(ui-view)
+
+        include ../public/templates/chat
+        include ../public/templates/chat-index
+        include ../public/templates/chat-user-online
+        include ../public/templates/404
+        include ../public/templates/chat-history
 
         script(src="javascripts/app.js")

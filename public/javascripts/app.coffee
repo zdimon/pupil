@@ -7,24 +7,24 @@ angular.module('chatApp', ['ui.router'])
     $stateProvider
     .state 'chat',
         url: '/'
-        templateUrl: 'templates/chat.html'
+        templateUrl: 'chat.html'
 
     .state 'chat.index',
         url: 'index'
         views:
             '':
-                templateUrl: 'templates/chat-index.html'
+                templateUrl: 'chat-index.html'
             'user-online':
-                templateUrl: 'templates/chat-user-online.html'
+                templateUrl: 'chat-user-online.html'
 
 
     .state 'chat.history',
         url: 'users'
-        templateUrl: 'templates/chat-history.html'
+        templateUrl: 'chat-history.html'
 
     .state 'chat.404',
         url: '404'
-        templateUrl: 'templates/404.html'
+        templateUrl: '404.html'
 
     $urlRouterProvider.when('', '/index');
     $urlRouterProvider.otherwise('/404');
