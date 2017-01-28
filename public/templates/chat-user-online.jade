@@ -2,5 +2,8 @@ script(type="text/ng-template" id="chat-user-online.html")
     div.col-md-4
         h2 User online
         ul
-            li(ng-repeat="u in users_online")
-                {{ u }}
+            li(ng-repeat="u in users_online" ng-show="u!=current_user_id")
+                button(class="btn btn-success" ng-click="open_chat(u)" ) {{ u }}
+
+
+        

@@ -2,6 +2,7 @@ script(type="text/ng-template" id="chat.html")
 
 	nav(class="navbar navbar-default")
 		div( id="navbar" class="navbar-collapse collapse")
+			button(class="btn btn-danger") {{ current_user_id }}
 			ul(class="nav navbar-nav navbar-right")
 				li(ui-sref-active="active")
 					a(ui-sref="chat.index" href="#") Home

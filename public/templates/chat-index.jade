@@ -1,3 +1,12 @@
 script(type="text/ng-template" id="chat-index.html")
     div.col-md-8
         h2 Chat box
+
+        div( ng-repeat="room in active_rooms" class="well")
+            h3 {{room.opponent}}
+            ul
+                li(ng-repeat="m in room.messages")
+                    {{ m }}
+
+        input(ng-model="message")
+        button(class="btn btn-success" ng-click="send()") Send

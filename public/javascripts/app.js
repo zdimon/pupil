@@ -8,7 +8,8 @@
       url: 'index',
       views: {
         '': {
-          templateUrl: 'chat-index.html'
+          templateUrl: 'chat-index.html',
+          controller: 'chatCtrl'
         },
         'user-online': {
           templateUrl: 'chat-user-online.html',
@@ -27,7 +28,7 @@
     $locationProvider.html5Mode(false);
     return $locationProvider.hashPrefix('');
   }).run([
-    'mySocket', 'uuid', '$window', function(mySocket, uuid, $window) {
+    'mySocket', 'uuid', '$window', '$rootScope', function(mySocket, uuid, $window, $rootScope) {
       var user_id;
       user_id = uuid.v4();
 
@@ -44,9 +45,10 @@
           user_id: user_id
         });
       };
-      return mySocket.emit('join', {
+      mySocket.emit('join', {
         user_id: user_id
       });
+      return $rootScope.current_user_id = user_id;
     }
   ]);
 

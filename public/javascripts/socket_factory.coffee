@@ -1,7 +1,6 @@
 angular.module('chatApp')
-.factory 'mySocket', (socketFactory)->
-    mySocket = socketFactory
-        disconnect: (close)->
-            alert 'ddd'
-          
-    return mySocket
+.factory 'mySocket', [ 'socketFactory', '$rootScope', (socketFactory, $rootScope)->
+    sock = socketFactory()
+
+    sock
+]

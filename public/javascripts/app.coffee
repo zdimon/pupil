@@ -11,6 +11,7 @@ angular.module('chatApp', ['ui.router', 'btford.socket-io', 'angular-uuid'])
         views:
             '':
                 templateUrl: 'chat-index.html'
+                controller: 'chatCtrl'
             'user-online':
                 templateUrl: 'chat-user-online.html'
                 controller: 'onlineCtrl'
@@ -30,7 +31,7 @@ angular.module('chatApp', ['ui.router', 'btford.socket-io', 'angular-uuid'])
     $locationProvider.html5Mode(false)
     $locationProvider.hashPrefix('')
 
-.run [ 'mySocket', 'uuid', '$window', (mySocket,uuid, $window)->
+.run [ 'mySocket', 'uuid', '$window', '$rootScope', (mySocket,uuid, $window, $rootScope)->
     user_id = uuid.v4()
 
     #$rootScope.$on '$destroy', ()->
@@ -49,6 +50,6 @@ angular.module('chatApp', ['ui.router', 'btford.socket-io', 'angular-uuid'])
 
     #console.dir mySocket
 
-    mySocket.emit('join',{user_id: user_id });
-
+    mySocket.emit('join',{user_id: user_id })
+    $rootScope.current_user_id = user_id
 ]
