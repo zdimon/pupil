@@ -11,7 +11,8 @@
           templateUrl: 'chat-index.html'
         },
         'user-online': {
-          templateUrl: 'chat-user-online.html'
+          templateUrl: 'chat-user-online.html',
+          controller: 'onlineCtrl'
         }
       }
     }).state('chat.history', {
@@ -26,12 +27,23 @@
     $locationProvider.html5Mode(false);
     return $locationProvider.hashPrefix('');
   }).run([
-    'mySocket', 'uuid', '$rootScope', function(mySocket, uuid, $rootScope) {
+    'mySocket', 'uuid', '$window', function(mySocket, uuid, $window) {
       var user_id;
       user_id = uuid.v4();
-      mySocket.on('time', function(data) {
-        return console.log(data);
-      });
+
+      /*
+      mySocket.on 'someone_left',  (data)->
+          console.log data
+      
+      mySocket.on 'someone_joined',  (data)->
+          console.log data
+       */
+      $window.onunload = function() {
+        return mySocket.emit('disconnection', {
+          message: 'disconect',
+          user_id: user_id
+        });
+      };
       return mySocket.emit('join', {
         user_id: user_id
       });

@@ -4,12 +4,12 @@ module.exports = (io)->
         console.log('Client connected...')
 
         client.on 'join', (data)->
-            sockets[data.user_id] = ''
-            console.log sockets
+            sockets[data.user_id] = client
+            io.emit('someone_joined', {user_id: data.user_id, act: 'someone_joined'});
 
-        client.on 'disconnect', (data)->
+        client.on 'disconnection', (data)->
             delete sockets[data.user_id]
-            console.log 'ssssssssssssssssssssss'
+            io.emit('someone_left', {user_id: data.user_id, act: 'someone_left'});
 ###
     setInterval ()->
         time = new Date()

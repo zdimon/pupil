@@ -6,12 +6,18 @@
     return io.on('connection', function(client) {
       console.log('Client connected...');
       client.on('join', function(data) {
-        sockets[data.user_id] = '';
-        return console.log(sockets);
+        sockets[data.user_id] = client;
+        return io.emit('someone_joined', {
+          user_id: data.user_id,
+          act: 'someone_joined'
+        });
       });
-      return client.on('disconnect', function(data) {
+      return client.on('disconnection', function(data) {
         delete sockets[data.user_id];
-        return console.log('ssssssssssssssssssssss');
+        return io.emit('someone_left', {
+          user_id: data.user_id,
+          act: 'someone_left'
+        });
       });
     });
   };

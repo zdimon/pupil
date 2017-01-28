@@ -13,6 +13,7 @@ angular.module('chatApp', ['ui.router', 'btford.socket-io', 'angular-uuid'])
                 templateUrl: 'chat-index.html'
             'user-online':
                 templateUrl: 'chat-user-online.html'
+                controller: 'onlineCtrl'
 
 
     .state 'chat.history',
@@ -29,14 +30,24 @@ angular.module('chatApp', ['ui.router', 'btford.socket-io', 'angular-uuid'])
     $locationProvider.html5Mode(false)
     $locationProvider.hashPrefix('')
 
-.run [ 'mySocket', 'uuid', '$rootScope', (mySocket,uuid, $rootScope)->
+.run [ 'mySocket', 'uuid', '$window', (mySocket,uuid, $window)->
     user_id = uuid.v4()
 
     #$rootScope.$on '$destroy', ()->
     #    mySocket.emit('disconect',{message: 'disconetc', user_id:  user_id});
 
-    mySocket.on 'time',  (data)->
+    ###
+    mySocket.on 'someone_left',  (data)->
         console.log data
+
+    mySocket.on 'someone_joined',  (data)->
+        console.log data
+    ###
+    $window.onunload = ()->
+        mySocket.emit('disconnection',{message: 'disconect', user_id:  user_id})
+
+
+    #console.dir mySocket
 
     mySocket.emit('join',{user_id: user_id });
 

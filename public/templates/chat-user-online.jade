@@ -1,3 +1,6 @@
 script(type="text/ng-template" id="chat-user-online.html")
     div.col-md-4
         h2 User online
+        ul
+            li(ng-repeat="u in users_online")
+                {{ u }}
