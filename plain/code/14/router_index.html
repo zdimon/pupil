@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="utf-8">
+     <script src="http://code.angularjs.org/1.5.0/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+
+
+</head>
+<body ng-app="myApp">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Router </h2>
+                    <ul>
+                     
+                      <li><a href="#/">Main</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                      
+                    </ul>
+
+        <div ng-view></div>
+
+    </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',['ngRoute'])
+    .controller('mainController',function($scope){
+    
+    })
+    .controller('contactController',function($scope){
+    
+    })
+    .config( function($routeProvider) {
+            $routeProvider
+            .when('/', {
+                        template : '<h1>Main</h1>',
+                        controller  : 'mainController'
+            })
+            .when('/contact', {
+                        template : '<h1>Contact</h1>',
+                        controller  : 'contactController'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });                      
+        }
+    )
+
+.run(function(){
+
+   
+
+})
+
+
+;
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app=myApp>
+    <head>
+        <title>Test</title>
+<script type="text/javascript"  src="angular.min.js"></script>
+        
+  </head>
+<body >
+<div ng-controller="myController">
+	
+	 Email:<input type="text" ng-model="email"/>
+     Name:<input type="text" ng-model="name"/>
+
+	<button ng-click="add()">Add</button>
+	<h2>Contacts</h2>
+
+	<table>
+        <th>
+            <td>Number</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Action</td>
+        </th>
+		<tr ng-repeat="contact in contacts">
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td><a href="#" ng-click="del(contact.id)">X</a></td>
+        </tr>
+	</ul>
+
+</div>
+<script type="text/javascript"  src="ctrl3.js"></script>
+
+</body>
+</html>

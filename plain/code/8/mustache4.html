@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="mustache.min.js"></script>
+        <script src="jquery.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Mustache example</h1>
+                
+        <ul id="messageList" ></ul>
+
+
+        <script id="messageTpl" type="text/template">
+            <li>{{userName}} : {{datePosted}} : {{messageText}}</li>
+        </script>
+
+    <script>
+
+        var data = {name: "Dimitry the Imposter", skills: ['JavaScript', 'PHP', 'Python']};
+        var tpl = "<li>{{name}} skills:<ul>{{#skills}}<li>{{.}}</li>{{/skills}}</ul>";
+        var html = Mustache.to_html(tpl, data);
+        $('#messageList').append(html);
+
+
+       
+    </script>
+
+    </body>
+</html>

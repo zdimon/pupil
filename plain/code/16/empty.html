@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-translate/dist/angular-translate.min.js"></script>
+    <script src="node_modules/angular-translate-loader-url/angular-translate-loader-url.min.js"></script>
+    
+    <script src="node_modules/angular-cookies/angular-cookies.min.js"></script>    
+
+    <script src="node_modules/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>  
+    
+        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script> 
+        
+    <script src="node_modules/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>          
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h1 translate="TRANSLATION_ID" translate-values='{ cnt: "123"}'>  </h1>
+  
+    <h2> {{ 'HEADLINE' | translate }} </h2>
+    
+    <h2 translate> {{ 'HEADLINE' }} </h2>
+    
+    <h2 translate= 'HEADLINE'></h2>
+
+    {{ test }}
+
+    <a ng-click="switch('ru')">RU</a>
+    <a ng-click="switch('en')">EN</a>
+    
+    <ul>
+        <li ng-repeat="i in items"> <p translate> {{ i }} </p></li>
+    </ul>
+  </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',['pascalprecht.translate', 'ngCookies', 'LocalStorageModule'])
+    .controller('testCtrl',function($scope, $translate, $rootScope, localStorageService){
+
+
+        console.log(localStorageService.getStorageType());
+
+        $rootScope.$on('$translateChangeSuccess', function () {
+            $translate('test').then(function(r){
+            
+                $scope.test = r;
+            
+            }, function(id){
+            
+                 $scope.test = id;
+                
+            });  
+        });
+        
+        $scope.switch = function(l){
+                $translate.use(l);
+        };
+        
+        $scope.items = ['uno', 'quadro']
+
+    })
+
+    .config(function($translateProvider){
+    
+    
+       
+        
+        //$translateProvider.useCookieStorage();    
+        $translateProvider.useLocalStorage();
+        
+        $translateProvider.translations('en',{
+        
+            HEADLINE: 'Hello there!!!!!',
+            test: 'english',
+            uno: 'one',
+            TRANSLATION_ID: "You have gotten {{ cnt }} mails."
+        
+        });
+        
+        $translateProvider.translations('ru',{
+        
+            HEADLINE: 'Привет!!',
+            test: 'russian',
+            uno: 'раз',
+            TRANSLATION_ID: "Вы получили {{ cnt }} писем."
+        });        
+        
+        
+        $translateProvider.preferredLanguage('ru');
+    })
+
+    ;
+    
+    
+    </script>
+    
+</body>
+</html>

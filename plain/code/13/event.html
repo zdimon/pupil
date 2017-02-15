@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.2.0/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Events </h2>
+  
+    {{ event }}
+    
+        <a href="#" ng-click="fire()">Fire!</a>
+
+    </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',[])
+    .controller('testCtrl',function($scope, $timeout, $interval){
+    
+        $scope.$on('back', function(){
+
+            alert('Back!!!');
+
+        });
+        
+        $scope.fire = function(){
+           console.log('fire');
+           $scope.$emit('fire',{message: 'I an here!'})
+        };        
+    
+    })
+
+.run(function(config,$rootScope){
+
+    $rootScope.$on('fire', function(){
+        
+        alert(config.appName);
+        $rootScope.$broadcast('back', {message: 'Back!!!'});
+
+    });
+
+})
+
+.constant('config', {
+    appName: 'My App'
+})
+
+
+;
+    
+    </script>
+    
+</body>
+</html>

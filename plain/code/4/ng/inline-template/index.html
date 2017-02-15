@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TEST</title>  
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+  </head>
+  <body ng-app="articleApp" id="ng-app">
+
+    <script type="text/ng-template" id="list.html">
+            <h1>My message - {{ message }}</h1>
+            <ul>
+                <li ng-repeat="i in items"> {{ i.name }} </li>
+            </ul>           
+    </script>
+      <div ng-view></div>
+    <script src="app.js"></script>
+  </body>
+</html>

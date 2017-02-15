@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script>
+       
+        console.log('Start');  
+        var delay = 5; // 5 second delay
+        var now = new Date();
+       
+        var desiredTime = new Date().setSeconds(now.getSeconds() + delay);
+
+        while (now < desiredTime) {
+            now = new Date(); // update the current time
+        }    
+            
+        console.log('End');
+        
+        
+        
+        function afterdelay(){
+            console.log('After');
+            
+        };
+        console.log('Start');  
+        
+        setTimeout(afterdelay,5000);
+        
+        console.log('End');
+        
+        
+    </script>
+</head>
+</html>
+

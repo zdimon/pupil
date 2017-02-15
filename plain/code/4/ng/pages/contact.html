@@ -1,0 +1,18 @@
+<div class="col-md-4">
+   <h3>Contact</h3>
+</div>
+
+<div class="col-md-8">
+    <table class='table table-striped'>
+        <thead class="thead-inverse">
+            <td>id</td>
+            <td>name</td>
+            <td>contact</td>
+        </thead>
+        <tr ng-repeat="contact in contacts">
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+        </tr>
+    </table>
+</div>

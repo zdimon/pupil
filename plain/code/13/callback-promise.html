@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.0.2/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Testing </h2>
+  
+    <a ng-click="go_callback()" href="#">Go with callback</a>
+     <br>
+     <a ng-click="go_promise()" href="#">Go with promise</a>
+    </div>   
+     <a ng-click="go_mypromise(2)" href="#">Go with my promise</a>
+    </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',[])
+    .controller('testCtrl',function($scope, $http, $q, $timeout){
+    
+        $scope.go_callback = function(){
+            console.log('go with callback');
+            $.get('one.txt', function(res,status){
+                json = JSON.parse(res);
+                console.log(json);
+                console.log(status);
+                $.get('two.txt', function(res,status){
+                    console.log(res);
+                }); 
+            });                 
+        };
+        
+        var mypromise = function(flag){
+            var deferred = $q.defer();
+                          
+            if(flag=='0') {
+                deferred.resolve('Yes!!'); 
+            } else {
+                deferred.reject('No!');
+            }    
+                
+            return deferred.promise;
+            //$http.get('two.txt');
+        };
+        
+        $scope.go_promise = function(){
+           console.log('go with promise');
+           $http.get('one.txt').then(
+             mypromise   
+           ).then(
+             function(){
+                console.log('ddd');
+             }
+           );
+        };    
+    
+        $scope.go_mypromise = function(flag){
+           
+           mypromise(flag).then( function(r){
+             console.log('Accepted');
+             console.log(r);
+            },
+            function(r){
+             console.log('Rejected');
+             console.log(r);
+            }
+           );
+        };        
+    
+    
+    });
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!-- index.html -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+
+    </head>
+    <body ng-app="myApp" ng-controller="testCtrl">
+           
+               <input ng-model="message">
+               <h2>{{ message }}</h2>
+       
+  
+       <script >
+
+    var app = angular.module('myApp', []);
+
+    app.controller('testCtrl', function($scope) {
+
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.message = "Timeout called!";
+                console.log('calling');
+            });
+
+        }, 2000);
+       
+    });
+
+    
+
+        </script>
+    </body>
+    </html>
+
+

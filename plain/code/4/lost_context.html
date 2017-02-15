@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script>
+       
+       
+        
+      var user = {
+      firstName: "Vova",
+      sayHi: function() {
+        alert( this.firstName );
+      }
+    };
+    
+    function getclosure(){
+        var name = 'Putin';
+        return function(){
+            alert(name);
+        }
+        
+    };
+    myf = getclosure.apply({name: 'dddddd'},[]);
+    myf();
+    //setTimeout(function(){ user.sayHi() }, 1000);
+    
+    //setTimeout(user.sayHi.bind(user), 1000);    
+        
+    </script>
+</head>
+</html>

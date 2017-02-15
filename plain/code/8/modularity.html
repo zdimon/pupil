@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <script src="mustache.min.js"></script>
+        <script src="jquery.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Modular JS</h1>
+                
+        <div id="peopleModule">
+
+            <input type="text">
+            <button> Add </button>
+
+            <ul></ul>
+        </div>
+
+       
+
+    <script>
+
+    var people = []
+    var template = "{{#people}} <li> {{.}} <p class='del'>X</p></li> {{/people}}";
+    
+    $('#peopleModule').find('button').on('click', function(){
+
+        people.push($('#peopleModule').find('input').val());
+        $('#peopleModule').find('input').val('');
+        var data = {
+            people: people,
+        };
+        $('#peopleModule').find('ul').html(Mustache.render(template,data));
+
+    });
+
+
+
+    $('#peopleModule').find('ul').delegate('p.del', 'click', function(e){
+        console.log(e);
+        var $remove = $(e.target).closest('li');
+        var i = $('#peopleModule').find('ul').find('li').index($remove);
+        $remove.remove();
+        people.splice(i,1);
+    });
+
+     function test(){};
+     debugger;
+       
+    </script>
+
+    </body>
+</html>

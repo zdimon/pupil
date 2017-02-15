@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app=myApp>
+    <head>
+        <title>Test</title>
+<script type="text/javascript"  src="angular.min.js"></script>
+        
+  </head>
+<body >
+<div ng-controller="myController">
+	
+	 Email:<input type="text" ng-model="newcontact"/>
+	<button ng-click="add()">Add</button>
+	<h2>Contacts</h2>
+
+	<ul>
+		<li ng-repeat="contact in contacts"> {{ contact }} </li>
+	</ul>
+
+</div>
+<script type="text/javascript"  src="ctrl2.js"></script>
+
+</body>
+</html>

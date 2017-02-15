@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script src="mustache.min.js"></script>
+        <script src="jquery.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Mustache example</h1>
+                
+        <ul id="messageList" ></ul>
+
+    
+    <script>
+
+        var messages = [
+            {userName: 'Dima', datePosted: '2016-01-01', messageText:'hello'},
+            {userName: 'Vova Putin', datePosted: '2016-01-02', messageText:'HI'}
+        ];
+
+        $.each(messages, function(index, message) {
+            $('#messageList').append(
+                '<li><span class="list-title">' +
+                message.userName + '</span>' +
+                '<abbr class="list-timestamp" title="' +
+                message.datePosted + '"></abbr>' +
+                '<p class="list-text">' + message.messageText + '</p></li>');
+            }
+        );        
+
+    </script>
+
+    </body>
+</html>

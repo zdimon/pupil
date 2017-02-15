@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.2.0/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Digest </h2>
+  
+    {{ time }}
+    
+        <a ng-click="start()">Start</a>
+
+    </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',[])
+    .controller('testCtrl',function($scope, $timeout, $interval){
+    
+        $scope.time = 'No time'
+        
+        
+        
+        $scope.start = function(){
+           console.log('start');
+            $interval(function(){
+                $scope.time = new Date();
+                console.log('updated');
+                
+            }, 1000);
+        };    
+    
+        
+    
+    
+    });
+    
+    </script>
+    
+</body>
+</html>

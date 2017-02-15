@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.5.0/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+
+
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Testing </h2>
+    
+    <form>
+        <input type="text" ng-model="name" one />
+        
+        <input type="submit" name="go" value="go">
+    </form>
+
+
+    
+     
+  </div>
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',[])
+    .controller('testCtrl',function($scope, $filter){
+
+        
+         $scope.name =  $filter('uppercase')('Hello');
+         $scope.today = new Date() ;
+
+    $scope.isCapitalized = function(str){
+        return str[0] == str[0].toUpperCase();
+    };
+
+        $scope.users = [{name: 'Ralf'},{name: 'Adolf'}]
+        
+    })
+
+.directive('one', function(){
+
+    return {
+             require: '?ngModel',
+             restrict: 'A',
+             link: function(scope,el,attr,ngModel){
+             
+                console.log(ngModel);
+             
+             }
+           }
+
+})
+    ;
+    
+    
+    </script>
+    
+</body>
+</html>

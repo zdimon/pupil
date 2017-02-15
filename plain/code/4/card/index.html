@@ -1,0 +1,94 @@
+<!-- index.html -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <!-- SCROLLS -->
+      <!-- load bootstrap and fontawesome via CDN -->
+<!-- Latest compiled and minified CSS -->
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+      <!-- SPELLS -->
+      <!-- load angular and angular route via CDN -->
+     
+      
+          <script src="http://code.angularjs.org/1.0.2/angular.js"></script>
+    <script src="http://code.angularjs.org/1.0.2/angular-sanitize.js"></script>
+    
+     
+      
+      <link rel="stylesheet" type="text/css" media="all" href="playingCards.ui.css"/>
+      <script type="text/javascript" src="playingCards.js"></script>
+      <script type="text/javascript" src="playingCards.ui.js"></script>      
+          
+
+    </head>
+    <body>
+
+        <!-- HEADER AND NAVBAR -->
+        <header>
+            <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Angular Example</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                    <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+                </ul>
+            </div>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+        <div id="main">
+
+        <div ng-app="myApp" class="container">
+           <div ng-controller="cardsCtrl">
+                <p ng-bind="msg"></p>
+                
+                <a ng-click="draw()">go</a>
+                <p ng-bind-html="c.getHTML()"></p>
+                
+               <ul>
+                   <li ng-repeat="c in cards.cards ">
+                   
+                    
+                    
+                    <div ng-bind-html="c.getHTML()"></div>
+                        
+                   </li>
+               </ul>
+               
+               
+           </div>
+        </div>
+
+        </div>
+       <script>
+        app = angular.module('myApp',['ngSanitize']);
+        app.controller('cardsCtrl',function($scope,$sanitize){
+            $scope.cards = $().playingCards();
+            $scope.draw = function(){
+                $scope.c = $scope.cards.draw();
+            };
+            
+        });
+        
+       var cards = $().playingCards();
+       
+       </script>
+    </body>
+    </html>
+
+

@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.2.0/angular.js"></script>
+    
+     <script src="/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js"></script>    
+    
+     <script src="node_modules/angular-socket-io/socket.min.js"></script>     
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Chat </h2>
+        {{ message }}
+       <ul>
+            <li ng-reapeat="for m in messages">{{ messages }}</li>
+       </ul>
+    
+       <text ng-model="messages"> </message>
+       <a ng-click="send()">Send</a> 
+
+    </div>  
+    
+    <script type="text/javascript">
+    
+    app = angular.module('myApp',['btford.socket-io'])
+    .controller('testCtrl',function($scope, sock){
+        
+            $scope.send = function(){
+                sock.emit('message',{message: 'helllooooo'});
+            };
+            
+            $scope.$on('got_message',function(evt,msg){
+                $scope.messages = msg;
+            });
+                
+       
+    })
+
+    .run(function($rootScope){
+
+       
+
+    })
+
+    .factory('sock', function(socketFactory,$rootScope){
+        sock =  socketFactory();
+        sock.on('message',function(msg){
+               $rootScope.$broadcast('got_message',msg);
+            });
+        return sock;
+        
+        }
+    )
+
+;
+    
+    </script>
+    
+</body>
+</html>

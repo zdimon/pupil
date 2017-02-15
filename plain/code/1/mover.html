@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title> Hello </title>
+
+    <script>
+            function move(t){
+   
+              
+               
+                if(Math.floor(Math.random()*2)==1){
+                    
+                    if(Math.floor(Math.random()*2)==1) {
+                        t.style.marginTop = parseInt(t.style.marginTop) + 20;
+                    } else {
+                        t.style.marginTop = parseInt(t.style.marginTop) - 20;
+                    }
+
+                } else {
+                    
+                    if(Math.floor(Math.random()*2)==1) {
+                        t.style.marginLeft = parseInt(t.style.marginLeft) + 20;
+                    } else {
+                        t.style.marginLeft = parseInt(t.style.marginLeft) - 20;
+                    }
+                }
+
+
+              
+                
+            }
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            console.log(document);
+            div = document.getElementById('canvas');
+            console.log(document.getElementById('canvas'));
+            console.log(window.screen.width);
+            div.style.marginTop = (window.screen.height/2)-200;
+            div.style.marginLeft = (window.screen.width/2)-200;
+            a = document.getElementsByName('mylink');
+            console.log(a);
+
+
+
+        });
+    </script>
+
+    </head>    
+
+    <body>    
+        <div id="canvas" style="border: 1px solid red; height:400px; width:400px">
+            <div name="mylink" 
+                 style="border: 1px solid red; height:10px; width:10px; margin-top: 190px; margin-left: 190px;"
+                 onmouseover="move(this)"            
+            > 
+                
+            </div>
+        </div>
+    </body>
+</html>

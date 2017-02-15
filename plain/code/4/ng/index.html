@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="routingApp">
+<head>
+  <title>Route Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+          <!-- Static navbar -->
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
+                  <li ng-class="{ active: isActive('/about')}"><a href="#about">About</a></li>
+                  <li ng-class="{ active: isActive('/contact')}"><a href="#contact">Contact</a></li>
+                  
+                </ul>
+              </div>
+            </div><!--/.container-fluid -->
+          </nav>
+
+         <div class="well container">     
+             <div ng-view></div>
+         </div>
+
+    </div>
+<script src="app.js"></script>
+</body>
+</html>

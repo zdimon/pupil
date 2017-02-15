@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.angularjs.org/1.5.0/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    
+</head>
+<body ng-app="myApp" ng-controller="testCtrl">
+  <div style="border: 1px solid silver; padding: 20px;">
+  
+    <h2> Testing </h2>
+
+
+    <a ng-click="sayhello()" href="#"> HEllo </a>
+
+    <div ng-include="'test.html'" ng-controller="baseCtrl" ng-init="name = 'World'"> 
+        Hello {{ name }}
+    </div>
+    Hello {{ name }}
+    <input ng-model="name" ng-model-options="{ updateOn: 'blur', debounce: 2000 }">
+
+
+
+  </div>  
+    
+    <script type="text/javascript">
+    
+    
+    app = angular.module('myApp',[])
+
+    .controller('baseCtrl',function($scope){
+        
+        $scope.myvar = 'Hello';
+        $scope.sayhello = function(){
+            console.log($scope.myvar);
+        };
+
+       
+    })
+
+    .controller('testCtrl',function($scope,$controller){
+        var vm = this;
+        angular.extend(vm, $controller('baseCtrl', {$scope: $scope}));
+
+    })
+
+
+;
+    
+    
+    </script>
+    
+</body>
+</html>

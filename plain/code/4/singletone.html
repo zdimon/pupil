@@ -1,0 +1,38 @@
+<html>
+<head>
+    <script>
+       
+       
+     single = (function(){
+          var instance;
+          
+          function createInstance(){
+            return {
+                name: 'Dima',
+                rand: Math.random()
+              };
+          }
+          
+          return {
+            getObj: function(){
+                if(!instance) {
+                  instance = createInstance();
+                  return instance;
+                } else {
+                  return instance;
+                }
+               
+            }
+          };
+     
+     } 
+     
+     )();   
+     
+        
+     obj1 =  single.getObj();  
+     obj2 =  single.getObj();  
+        
+    </script>
+</head>
+</html>

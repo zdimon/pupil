@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="scopeApp">
+<head>
+  <title>Scope Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+</head>
+<body>
+    <h1> Global name outside controller is - {{ globalname }}</h1>
+    <h2> My name outside controller is - {{ myname }} </h2>
+  <div ng-controller="FirstController" style="border: 1px solid red">
+    <h2>Hello {{ myname }}</h2>
+
+    <h1> Global name inside first controller is - {{ globalname }}</h1>
+
+    <input type="submit" ng-click='setmyname()' value="Set my name"/>
+
+    <input type="submit" ng-click='setglobalname()' value="Set global name"/>
+
+  </div>
+
+<br />
+
+ <div ng-controller="SecondController" style="border: 1px solid red">
+    <h2>His name {{ hisname }}</h2>
+
+    <h1> My name from first controller is - {{ myname }}</h1>
+
+    <h1> Global name inside second controller is - {{ globalname }}</h1>
+   
+    <input type="submit" ng-click='sethisname()' value="Set his name"/>
+
+  </div>
+
+
+<script src="scope.js"></script>
+</body>
+</html>

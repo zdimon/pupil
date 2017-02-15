@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   
+</head>
+
+<body>
+    <div id="square" style="border:1px solid red; width: 100px; height: 100px; padding: 100px"> </div>
+    
+    <p></p>
+    <a href="#" onclick="change_color()"> Change color </a>
+    <a href="#" onclick="hide()"> Hide  </a>    
+    
+    <div id="square2" style="border:1px solid green; width: 100px; height: 100px; padding-left: 220px"> </div>
+    
+    
+    <p></p>
+    <a href="#" onclick="change_color2()"> Change color </a>
+    <a href="#" onclick="hide2()"> Hide  </a>    
+
+    
+
+
+
+ <script>
+       
+        var square = {
+           x: 12,
+           y: 23,
+           item: $('#square'),
+           getx: function(){ return this.x },
+           hide: function(){ this.item.hide() },
+           change_color: function(){ this.item.css('background', 'black') }
+        }
+        
+        var square2 = {__proto__: square, item: $('#square2')};
+       
+       
+        function change_color(){
+            square.change_color();
+        };
+      
+              function hide(){
+            square.hide();
+        };
+        
+        
+        function change_color2(){
+            square2.change_color();
+        };
+      
+              function hide2(){
+            square2.hide();
+        };        
+        
+    </script>
+    
+
+
+</body>
+
+
+</html>

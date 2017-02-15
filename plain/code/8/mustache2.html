@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="mustache.min.js"></script>
+        <script src="jquery.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Mustache example</h1>
+                
+        <ul id="messageList" ></ul>
+
+    
+    <script>
+
+        var messages = [
+            {userName: 'Dima', datePosted: '2016-01-01', messageText:'hello'},
+            {userName: 'Vova Putin', datePosted: '2016-01-02', messageText:'HI'}
+        ];
+
+        var template = "<li><b>{{userName}}</b>: {{messageText}}</li>";
+
+        $.each(messages, function(index, message) {
+                var html = Mustache.to_html(template, message);
+                $('#messageList').append(html);
+            }
+        );        
+
+    </script>
+
+    </body>
+</html>
